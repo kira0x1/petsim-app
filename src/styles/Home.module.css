@@ -6,10 +6,6 @@
   padding: 6rem;
 }
 
-.main a {
-  color: rgb(125, 109, 213);
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(25%, auto));
