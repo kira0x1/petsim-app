@@ -40,7 +40,9 @@ export default function Home({ allPostsData }) {
           {allPostsData.map(({ id, date, title }: any) => (
             <li className={utilStyles.listItem} key={id}>
               <div className={utilStyles.bold}>{title}</div>
-              <div className={`${utilStyles.lightText}`}>{date}</div>
+              <
+                
+                div className={`${utilStyles.lightText}`}>{date}</div>
             </li>
           ))}
         </ul>
