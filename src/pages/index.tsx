@@ -1,13 +1,23 @@
-import styles from "@/styles/Home.module.css";
+import { Inter } from "@next/font/google";
 import Head from "next/head";
 import Link from "next/link";
-import { Inter } from "@next/font/google";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
+import { getSortedPostsData } from "../lib/posts";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
@@ -17,14 +27,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className={utilStyles.headingMid}>
-        <p>meow</p>
-        <p>nya</p>
-      </section>
-      <div className={styles.main}>
         <h1>
-          read <Link href="/posts/first_post">meow</Link>
+          <Link href="/posts/first_post">Profile</Link>
         </h1>
-      </div>
+      </section>
+
+      <section className={`${utilStyles.headingMid} ${utilStyles.padding1px}`}>
+        <h2 className={`${utilStyles.headingLg} ${utilStyles.greenText}`}>
+          Blog
+        </h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }: any) => (
+            <li className={utilStyles.listItem} key={id}>
+              <div className={utilStyles.bold}>{title}</div>
+              <div className={`${utilStyles.lightText}`}>{date}</div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </Layout>
   );
 }
