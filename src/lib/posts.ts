@@ -42,3 +42,27 @@ export function getSortedPostsData() {
     }
   });
 }
+
+export function getAllPostsIds() {
+  const fileNames = fs.readdirSync(postsDirectory);
+
+  return fileNames.map((fileName) => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, ""),
+      },
+    };
+  });
+}
+
+export function getPostData(id: string) {
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+
+  const metadata = matter(fileContents);
+
+  return {
+    id,
+    ...metadata.data,
+  };
+}
