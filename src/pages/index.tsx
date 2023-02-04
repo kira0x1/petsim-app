@@ -1,11 +1,8 @@
-import { Inter } from "@next/font/google";
 import Head from "next/head";
 import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -30,6 +27,9 @@ export default function Home({ allPostsData }) {
         <h1>
           <Link href="/posts/first_post">Profile</Link>
         </h1>
+        <h1>
+          <Link href="/pets">Pets</Link>
+        </h1>
       </section>
 
       <section className={`${utilStyles.headingMid} ${utilStyles.padding1px}`}>
@@ -40,9 +40,7 @@ export default function Home({ allPostsData }) {
           {allPostsData.map(({ id, date, title }: any) => (
             <li className={utilStyles.listItem} key={id}>
               <div className={utilStyles.bold}>{title}</div>
-              <
-                
-                div className={`${utilStyles.lightText}`}>{date}</div>
+              <div className={`${utilStyles.lightText}`}>{date}</div>
             </li>
           ))}
         </ul>
