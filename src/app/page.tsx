@@ -1,8 +1,10 @@
+import Link from "next/link";
+
 export default function HomePage() {
   return (
     <div>
       <h1>Home Page</h1>
-      <p>meow</p>
+      <Link href={"/pets"}>Pets</Link>
     </div>
   );
 }

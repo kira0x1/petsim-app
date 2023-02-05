@@ -20,11 +20,9 @@ export default async function PetPage({ params }: any) {
   const pet = await getPet(params.id);
 
   return (
-    <div>
-      <h1>pet/{pet.name}</h1>
-      <div className={styles.pet}>
-        <h3>{pet.name}</h3>
-      </div>
+    <div className={styles.pet}>
+      <h3 className={styles.petName}>{pet.name}</h3>
+      <h5>{pet.weight} kg</h5>
     </div>
   );
 }
