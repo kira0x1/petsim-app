@@ -15,3 +15,47 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.backBtn {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.text-lg {
+  font-size: 2em;
+}
+
+.text-md {
+  font-size: 1.5em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* .header {
+  border: 1px solid;
+} */
+
+.header-title {
+  margin: 0;
+  padding: 0;
+}
+
+.pet-list {
+  width: 25vw;
+  margin: auto;
+  text-align: center;
+}
+
+.pet-link {
+  background-color: #eee;
+  display: block;
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+}

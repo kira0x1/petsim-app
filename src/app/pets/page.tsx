@@ -1,5 +1,6 @@
 import PocketBase from "pocketbase";
 import Link from "next/link";
+import Header from "../components/header";
 
 export const dynamic = "auto",
   dynamicParams = true,
@@ -26,9 +27,10 @@ async function getPets() {
 export default async function PetsPage() {
   const pets = await getPets();
   return (
-    <div>
-      <h1>Pets</h1>
-      <div>
+    <div className="header">
+      <h1 className="header-title">Pets</h1>
+      <Header backLink={"/"} />
+      <div className="pet-list">
         {pets?.map((pet) => {
           return <Pet key={pet.id} pet={pet} />;
         })}
@@ -38,13 +40,11 @@ export default async function PetsPage() {
 }
 
 function Pet({ pet }: any) {
-  const { id, name } = pet || {};
+  const { name } = pet || {};
 
   return (
-    <Link href={`/pets/${pet.name}`}>
-      <div>
-        <h2>{name}</h2>
-      </div>
+    <Link href={`/pets/${pet.name}`} className="pet-link">
+      {name}
     </Link>
   );
 }
