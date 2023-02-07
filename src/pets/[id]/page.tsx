@@ -1,19 +1,13 @@
-import PocketBase from "pocketbase";
 import Header from "../../components/header";
 import styles from "../Pets.module.css";
 
 async function getPet(petId: string) {
-  const db = new PocketBase("http://127.0.0.1:8090");
-  const res = await db.collection("pets").getFirstListItem(`name="${petId}"`);
+  const res = await fetch(`http://127.0.0.1:8090/api/collections/pets/records`);
 
-  //   const res = await fetch(
-  // `http://127.0.0.1:8090/api/collections/pets/records/${petId}`,
-  // {
-  //   next: { revalidate: 10 },
-  // }
-  //   );
+  const pets = await res.json();
+  const petFound = pets.items.find((p) => p.name === petId);
 
-  return res as any;
+  return petFound;
 }
 
 export default async function PetPage({ params }: any) {

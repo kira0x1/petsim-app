@@ -1,0 +1,26 @@
+.header {
+  margin: auto;
+  width: 20vw;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.petName {
+  color: #df5555;
+}
+
+.pet {
+  width: 20vw;
+  margin: auto;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.pet h3 {
+  margin: 0;
+}
+
+.pet h5 {
+  margin: 0;
+  color: #4f4f4f;
+}
