@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { getPets } from ".";
 import Header from "../../components/header";
+import { getPet, getPets } from "../../lib/pet_util";
 import { Pokemon } from "../../types/pet";
 import styles from "./Pets.module.css";
 
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { id, name, sprites, weight } = await getPet(params.id);
+  const { id, name, sprites, weight, evolutions } = await getPet(params.id);
 
   return {
     props: {
@@ -31,32 +31,9 @@ export async function getStaticProps({ params }) {
         name,
         sprites,
         weight,
+        evolutions,
       },
     },
-  };
-}
-
-async function getPet(name: string) {
-  // const db = new PocketBase("http://127.0.0.1:8090");
-  // const res = await db.collection("pets").getFirstListItem(`name="${petId}"`);
-
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
-  const data = await res.json();
-  const evoReq = await fetch(
-    `https://pokeapi.co/api/v2/evolution-chain/${data.id}/`
-  );
-
-  const evoData = await evoReq.json();
-  const chain = evoData.chain;
-  const req = await fetch(chain.species.url);
-  const p = await req.json();
-
-  return {
-    name: data.name,
-    id: data.id,
-    weight: data.weight,
-    sprites: data.sprites,
-    evolutions: [{ id: p.id, name: p.name }],
   };
 }
 
@@ -65,24 +42,39 @@ export default function PetPage({ pet }: { pet: Pokemon }) {
     <>
       <Header backLink="/pets" />
       <div className={styles.pet}>
-        <h3 className={styles.petName}>{pet.name}</h3>
-        <h5>{pet.weight} kg</h5>
-        <div className={styles.pet_sprite}>
-          <Image
-            priority
-            src={pet.sprites.back_default}
-            width={200}
-            height={200}
-            alt="meow"
-            style={{ maxWidth: "100%", width: "auto", height: "auto" }}
-          />
-          {pet.evolutions?.map((e) => {
-            return (
-              <div key={e.id}>
-                <h3 className={styles.petName}>{e.name}</h3>
-              </div>
-            );
-          })}
+        <div className={styles.main_pet}>
+          <h3 className={styles.petName}>{pet.name}</h3>
+          <h5>{pet.weight} kg</h5>
+          <div className={styles.pet_sprite}>
+            <Image
+              priority={true}
+              src={pet.sprites.front_default}
+              width={96}
+              height={96}
+              alt={pet.name}
+              style={{ maxWidth: "100%", width: "auto", height: "auto" }}
+            />
+          </div>
+
+          {pet.evolutions?.length > 0 && <h2>Evolutions</h2>}
+
+          <div className={styles.evolution_grid}>
+            {pet.evolutions?.map((e) => {
+              return (
+                <div key={e.id}>
+                  <h3 className={styles.petName}>{e.name}</h3>
+                  <Image
+                    priority={true}
+                    src={e.sprites.front_default}
+                    width={96}
+                    height={96}
+                    alt={pet.name}
+                    style={{ maxWidth: "100%", width: "auto", height: "auto" }}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

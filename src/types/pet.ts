@@ -14,5 +14,5 @@ export interface Pokemon {
     front_shiny: string;
     front_shiny_female?: string;
   };
-  evolutions?: [any];
+  evolutions?: any;
 }
