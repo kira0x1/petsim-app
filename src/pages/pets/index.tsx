@@ -1,14 +1,21 @@
 import Link from "next/link";
 import Header from "../../components/header";
-import PocketBase from "pocketbase";
 
 export async function getPets() {
-  const db = new PocketBase("http://127.0.0.1:8090");
-  const data = await db.collection("pets").getList(1, 30);
+  // const db = new PocketBase("http://127.0.0.1:8090");
+  // const data = await db.collection("pets").getList(1, 30);
 
-  const res = data.items.map((p) => {
-    return { id: p.id, name: p.name };
-  });
+  const pokemons = await fetch(`https://pokeapi.co/api/v2/generation/4/`);
+  const res: any[] = [];
+  const badPokemons = ["giratina", "shaymin", "wormadam"];
+  try {
+    const pokemonRes = await pokemons.json();
+
+    for (const pokemon of pokemonRes.pokemon_species) {
+      if (badPokemons.includes(pokemon.name)) continue;
+      res.push({ id: pokemon.name });
+    }
+  } catch (e) {}
 
   return res;
 }
@@ -38,11 +45,11 @@ export default function PetsPage({ allPets }) {
 }
 
 function Pet({ pet }: any) {
-  const { name } = pet || {};
+  const { id } = pet || {};
 
   return (
-    <Link href={`/pets/${pet.name}`} className="pet-link">
-      {name}
+    <Link href={`/pets/${pet.id}`} className="pet-link">
+      {id}
     </Link>
   );
 }

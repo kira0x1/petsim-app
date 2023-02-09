@@ -79,9 +79,15 @@ img {
 }
 
 .pet-list {
-  width: 25vw;
+  width: 50vw;
   margin: auto;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .pet-link {
@@ -89,7 +95,10 @@ img {
   display: block;
   margin: 0;
   margin-bottom: 20px;
-  padding: 5px;
   font-size: 1.5em;
   font-weight: bold;
+  margin: 5px 10px;
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
 }
