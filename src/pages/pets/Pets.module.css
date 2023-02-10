@@ -37,3 +37,28 @@
   display: flex;
   text-align: center;
 }
+
+.pet_list {
+  width: 50vw;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.pet_link {
+  background-color: #eee;
+  display: block;
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+}
