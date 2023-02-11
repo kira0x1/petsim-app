@@ -43,8 +43,8 @@ export default function PetPage({ pet }: { pet: Pokemon }) {
       <Header backLink="/pets" />
       <div className={styles.pet}>
         <div className={styles.main_pet}>
-          <h3 className={styles.petName}>{pet.name}</h3>
-          <h5>{pet.weight} kg</h5>
+          <h3 className="text-rose-500 text-2xl bold capitalize">{pet.name}</h3>
+          {/* <h5>{pet.weight} kg</h5> */}
           <div className={styles.pet_sprite}>
             <Image
               priority={true}
@@ -52,17 +52,19 @@ export default function PetPage({ pet }: { pet: Pokemon }) {
               width={96}
               height={96}
               alt={pet.name}
-              style={{ maxWidth: "100%", width: "auto", height: "auto" }}
+              className="max-w-full w-auto h-auto"
             />
           </div>
 
-          {pet.evolutions?.length > 0 && <h2>Evolutions</h2>}
+          {pet.evolutions?.length > 0 && <h2 className="mt-4">Evolutions</h2>}
 
           <div className={styles.evolution_grid}>
             {pet.evolutions?.map((e) => {
               return (
-                <div key={e.id}>
-                  <h3 className={styles.petName}>{e.name}</h3>
+                <div key={e.id} className="mt-5">
+                  <h3 className="text-rose-500 text-1xl bold capitalize">
+                    {e.name}
+                  </h3>
                   <Image
                     priority={true}
                     src={e.sprites.front_default}
