@@ -44,7 +44,7 @@ export default function PetPage({ pet }: { pet: Pokemon }) {
       <div className={styles.pet}>
         <div className={styles.main_pet}>
           <h3 className="text-rose-500 text-2xl bold capitalize">{pet.name}</h3>
-          {/* <h5>{pet.weight} kg</h5> */}
+          <h5>{pet.weight} kg</h5>
           <div className={styles.pet_sprite}>
             <Image
               priority={true}
