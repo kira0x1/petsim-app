@@ -10,7 +10,6 @@ export default function Layout({ children }) {
         <meta name="og:title" content="Pet Sim" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-
       <main>{children}</main>
     </div>
   );

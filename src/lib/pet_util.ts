@@ -4,7 +4,7 @@ export async function getPets() {
   // const db = new PocketBase("http://127.0.0.1:8090");
   // const data = await db.collection("pets").getList(1, 30);
 
-  const pokemons = await fetch(`https://pokeapi.co/api/v2/generation/4/`);
+  const pokemons = await fetch(`https://pokeapi.co/api/v2/generation/1/`);
   const res: any[] = [];
   const badPokemons = ["giratina", "shaymin", "wormadam"];
   try {

@@ -1,8 +1,13 @@
-import Link from "next/link";
-import Layout from "../components/layout";
 import { Inter } from "@next/font/google";
-import Tabs from "../components/tabs";
+import { Environment, OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import Link from "next/link";
+import { Suspense } from "react";
+import { Color } from "three";
 import Content from "../components/content";
+import Layout from "../components/layout";
+import { Model } from "../components/model";
+import Tabs from "../components/tabs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +30,18 @@ export default function Home() {
           </Link>
         </Content>
       </Layout>
+      <div id="canvas-container" className="w-full h-96">
+        <Canvas>
+          <Suspense fallback={null}>
+            <Environment preset="sunset" background />
+            {/* <ambientLight intensity={0.5} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+            <pointLight position={[-10, -10, -10]} /> */}
+            <Model />
+            <OrbitControls />
+          </Suspense>
+        </Canvas>
+      </div>
     </>
   );
 }
